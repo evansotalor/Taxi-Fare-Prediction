@@ -18,7 +18,7 @@ st.markdown(
     """
     <center>
         <p float="center">
-          <img src="https://i.postimg.cc/gkG9vKXG/Case-Learn.png" width="400"/>
+          <img src="https://i.postimg.cc/gkG9vKXG/Case-Learn.png" width="300"/>
         </p>
         <br>
         <font size=6>CaseLearn</font>
@@ -87,3 +87,4 @@ if st.session_state.prediction is not None:
         """,
         unsafe_allow_html=True
     )
+

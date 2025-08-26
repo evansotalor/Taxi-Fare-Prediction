@@ -3,9 +3,13 @@ import joblib
 import pandas as pd
 
 # -------------------------------
-# Load trained model
+# Load trained model (cached)
 # -------------------------------
-model = joblib.load("taxi_model_v2.pkl")
+@st.cache_resource
+def load_model():
+    return joblib.load("taxi_model_v2.pkl")
+
+model = load_model()
 
 # -------------------------------
 # CaseLearn Branding
@@ -14,7 +18,7 @@ st.markdown(
     """
     <center>
         <p float="center">
-          <img src="https://i.postimg.cc/gkG9vKXG/Case-Learn.png" width="200" height="100"/>
+          <img src="https://i.postimg.cc/gkG9vKXG/Case-Learn.png" width="400"/>
         </p>
         <br>
         <font size=6>CaseLearn</font>

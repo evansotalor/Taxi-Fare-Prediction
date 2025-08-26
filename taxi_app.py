@@ -16,15 +16,20 @@ model = load_model()
 # -------------------------------
 st.markdown(
     """
-    <div style="display: flex; align-items: center; margin-bottom: 30px;">
+    <div style="display:flex; align-items:center; justify-content:flex-start; margin-left:0; padding-left:0;">
         <!-- Logo on the left -->
-        <img src="https://i.postimg.cc/gkG9vKXG/Case-Learn.png" width="200" style="margin-right: 20px;"/>
-        
-        <!-- Text on the right -->
         <div>
-            <div style="font-size:20px; font-weight:bold; color:#333;">CaseLearn</div>
-            <div style="font-size:28px; font-weight:bold; color:#000; margin-top:5px;">Introduction to Machine Learning</div>
-            <div style="font-size:18px; color:#555; margin-top:3px;">Supervised Learning - Regression</div>
+            <img src="https://i.postimg.cc/gkG9vKXG/Case-Learn.png" width="200"/>
+        </div>
+        <!-- Text on the right -->
+        <div style="margin-left:15px;">
+            <div style="font-size:16px; font-weight:bold; color:#333;">CaseLearn</div>
+            <div style="font-size:22px; font-weight:bold; color:#000; margin-top:3px;">
+                Introduction to Machine Learning
+            </div>
+            <div style="font-size:14px; color:#555; margin-top:2px;">
+                Supervised Learning - Regression
+            </div>
         </div>
     </div>
     """,
@@ -87,5 +92,6 @@ if st.session_state.prediction is not None:
         """,
         unsafe_allow_html=True
     )
+
 
 

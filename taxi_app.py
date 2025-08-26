@@ -34,17 +34,21 @@ st.markdown(
 st.markdown("---")
 
 # -------------------------------
+# Initialize session state
+# -------------------------------
+if "prediction" not in st.session_state:
+    st.session_state.prediction = None
+
+# -------------------------------
 # Sidebar for inputs
 # -------------------------------
 st.sidebar.header("Trip Details")
 
-# Categorical dropdowns
 time_of_day = st.sidebar.selectbox("Time of Day", ["Morning", "Afternoon", "Evening", "Night"])
 day_of_week = st.sidebar.selectbox("Day of Week", ["Weekday", "Weekend"])
 traffic = st.sidebar.selectbox("Traffic Conditions", ["Low", "Medium", "High"])
 weather = st.sidebar.selectbox("Weather", ["Clear", "Rain", "Snow"])
 
-# Numerical inputs with sensible ranges
 trip_distance = st.sidebar.number_input("Trip Distance (km)", min_value=0.5, max_value=100.0, value=5.0, step=0.5)
 passenger_count = st.sidebar.number_input("Passenger Count", min_value=1, max_value=6, value=1, step=1)
 base_fare = st.sidebar.number_input("Base Fare", min_value=1.0, max_value=20.0, value=3.0, step=0.5)
@@ -56,7 +60,6 @@ trip_duration = st.sidebar.number_input("Trip Duration (minutes)", min_value=1, 
 # Prediction
 # -------------------------------
 if st.sidebar.button("Predict Fare"):
-    # Create dataframe with input
     input_data = pd.DataFrame([{
         "Time_of_Day": time_of_day,
         "Day_of_Week": day_of_week,
@@ -70,14 +73,16 @@ if st.sidebar.button("Predict Fare"):
         "Trip_Duration_Minutes": trip_duration
     }])
 
-    # Predict
-    prediction = model.predict(input_data)[0]
+    st.session_state.prediction = model.predict(input_data)[0]
 
-    # Display result
+# -------------------------------
+# Display result (persistent)
+# -------------------------------
+if st.session_state.prediction is not None:
     st.markdown(
         f"""
         <div style='text-align: center; background-color:#fff3e6; padding:20px; border-radius:15px;'>
-            <h2 style='color:#ff6600;'>Predicted Taxi Fare: ${prediction:.2f}</h2>
+            <h2 style='color:#ff6600;'>Predicted Taxi Fare: ${st.session_state.prediction:.2f}</h2>
         </div>
         """,
         unsafe_allow_html=True

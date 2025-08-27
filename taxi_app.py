@@ -39,6 +39,11 @@ st.markdown(
 st.markdown("---")
 
 # -------------------------------
+# Page Title
+# -------------------------------
+st.title("🚖 Taxi Fare Prediction Case Study")
+
+# -------------------------------
 # Initialize session state
 # -------------------------------
 if "prediction" not in st.session_state:
@@ -81,17 +86,32 @@ if st.sidebar.button("Predict Fare"):
     st.session_state.prediction = model.predict(input_data)[0]
 
 # -------------------------------
-# Display result (persistent)
+# Display result (always visible)
 # -------------------------------
 if st.session_state.prediction is not None:
-    st.markdown(
-        f"""
-        <div style='text-align: center; background-color:#fff3e6; padding:20px; border-radius:15px;'>
-            <h2 style='color:#ff6600;'>Predicted Taxi Fare: ${st.session_state.prediction:.2f}</h2>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    prediction_text = f"Predicted Taxi Fare: ${st.session_state.prediction:.2f}"
+else:
+    prediction_text = "Pending Prediction..."
 
+st.markdown(
+    f"""
+    <div style='text-align: center; background-color:#fff3e6; padding:20px; border-radius:15px;'>
+        <h2 style='color:#ff6600;'>{prediction_text}</h2>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
+# -------------------------------
+# About this app
+# -------------------------------
+st.markdown("---")
+st.subheader("ℹ️ About this app")
+st.markdown(
+    """
+    This application was created on behalf of **CaseLearn**  
+    for the **Introduction to Machine Learning (Regression)** course.  
 
+    Learn more at [CaseLearn.com](https://caselearn.com)
+    """
+)

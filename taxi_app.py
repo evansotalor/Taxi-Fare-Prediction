@@ -66,6 +66,9 @@ per_km_rate = st.sidebar.number_input("Per Km Rate", min_value=0.5, max_value=10
 per_minute_rate = st.sidebar.number_input("Per Minute Rate", min_value=0.1, max_value=5.0, value=0.5, step=0.1)
 trip_duration = st.sidebar.number_input("Trip Duration (minutes)", min_value=1, max_value=180, value=15, step=1)
 
+# New input for range %
+fare_range_pct = st.sidebar.number_input("Fare Range %", min_value=1, max_value=50, value=6, step=1)
+
 # -------------------------------
 # Prediction
 # -------------------------------
@@ -89,7 +92,13 @@ if st.sidebar.button("Predict Fare"):
 # Display result (always visible)
 # -------------------------------
 if st.session_state.prediction is not None:
-    prediction_text = f"Predicted Taxi Fare: ${st.session_state.prediction:.2f}"
+    pred = st.session_state.prediction
+    lower = pred * (1 - fare_range_pct / 100)
+    upper = pred * (1 + fare_range_pct / 100)
+
+    prediction_text = f"Predicted Taxi Fare: ${pred:.2f}<br><br>" \
+                      f"<span style='font-size:18px; color:#333;'>Expected Fare Range: " \
+                      f"${lower:.2f} - ${upper:.2f}</span>"
 else:
     prediction_text = "Pending Prediction..."
 

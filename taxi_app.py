@@ -97,7 +97,7 @@ if st.session_state.prediction is not None:
     upper = pred * (1 + fare_range_pct / 100)
 
     prediction_text = f"Predicted Taxi Fare: ${pred:.2f}<br><br>" \
-                      f"<span style='font-size:18px; color:#333;'>Expected Fare Range: " \
+                      f"<span style='font-size:22px; color:#333;'>Expected Fare Range: " \
                       f"${lower:.2f} - ${upper:.2f}</span>"
 else:
     prediction_text = "Pending Prediction..."
@@ -124,3 +124,4 @@ st.markdown(
     Learn more at [CaseLearn.com](https://caselearn.com)
     """
 )
+
